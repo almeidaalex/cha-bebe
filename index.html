@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menino ou Menina? Raspadinha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <div class="deco" aria-hidden="true">
+      <span class="dot pink" style="top: 28px; left: 22px; width: 14px; height: 14px"></span>
+      <span class="dot blue" style="top: 70px; right: 30px; width: 10px; height: 10px"></span>
+      <span class="bar yellow" style="top: 150px; left: 14px; transform: rotate(30deg)"></span>
+      <span class="bar pink" style="top: 18px; right: 90px; transform: rotate(-25deg)"></span>
+      <span class="dot yellow" style="bottom: 120px; right: 16px; width: 12px; height: 12px"></span>
+      <span class="dot blue" style="bottom: 60px; left: 26px; width: 10px; height: 10px"></span>
+    </div>
+
+    <header>
+      <span class="tag">Chá revelação</span>
+      <h1><span class="boy-text">Menino</span> ou <span class="girl-text">Menina?</span></h1>
+      <p>Raspe os <strong>9 espaços</strong> para descobrir quem vem aí!</p>
+    </header>
+
+    <section class="card" aria-label="Cartela da raspadinha">
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <div class="stats">
+      <span>Raspados <strong id="scratched">0</strong> / 9</span>
+      <span class="pills">
+        <span class="pill girl">Menina <span id="girl-count">0</span></span>
+        <span class="pill boy">Menino <span id="boy-count">0</span></span>
+      </span>
+    </div>
+
+    <div id="status-playing" class="status-playing">Quem vem aí? Continue raspando…</div>
+    <div id="status-won" class="status-won hidden" role="status">
+      <div class="won-title">Estamos esperando um menino!</div>
+      <div class="won-sub">Parabéns, família! 💙</div>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="reveal-all" class="btn">Revelar tudo</button>
+      <button type="button" id="restart" class="btn primary">Jogar de novo</button>
+    </div>
+  </main>
+
+  <template id="slot-template">
+    <div class="slot">
+      <div class="prize"></div>
+      <canvas></canvas>
+    </div>
+  </template>
+
+  <canvas id="confetti"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>

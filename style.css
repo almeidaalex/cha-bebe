@@ -1,0 +1,298 @@
+@font-face {
+  font-family: "Fredoka";
+  font-weight: 500 700;
+  font-display: swap;
+  src: url("fonts/fredoka.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-weight: 500 800;
+  font-display: swap;
+  src: url("fonts/nunito.woff2") format("woff2");
+}
+
+:root {
+  --ink: #3B2A55;
+  --ink-soft: #5A4A70;
+  --cream: #FFF6EE;
+  --pink: #FF8FB8;
+  --pink-bg: #FFC2D9;
+  --pink-strong: #D63A7A;
+  --pink-dark: #7A1240;
+  --blue: #7CC4FF;
+  --blue-bg: #BFE2FF;
+  --blue-strong: #2E7FC4;
+  --blue-dark: #0B3D66;
+  --yellow: #FFD25E;
+  --yellow-bg: #FFE69A;
+  --yellow-dark: #6B4A00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--cream);
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+}
+
+.game {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 24px 32px;
+}
+
+.game > :not(.deco) {
+  position: relative;
+  width: 100%;
+  max-width: 342px;
+}
+
+.deco span {
+  position: absolute;
+}
+
+.dot {
+  border-radius: 50%;
+}
+
+.bar {
+  width: 8px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.deco .pink { background: var(--pink); }
+.deco .blue { background: var(--blue); }
+.deco .yellow { background: var(--yellow); }
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.tag {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+h1 {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.boy-text { color: var(--blue-strong); }
+.girl-text { color: var(--pink-strong); }
+
+header p {
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: 300px;
+  color: var(--ink-soft);
+}
+
+.card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 16px;
+  border: 3px solid var(--ink);
+  box-shadow: 0 6px 0 var(--ink), 0 18px 40px rgba(59, 42, 85, 0.15);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.slot {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+}
+
+.slot.done {
+  animation: slotPop 0.35s ease;
+}
+
+.prize {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  user-select: none;
+}
+
+.prize.boy { background: var(--blue-bg); color: var(--blue-dark); }
+.prize.girl { background: var(--pink-bg); color: var(--pink-dark); }
+.prize.joker { background: var(--yellow-bg); color: var(--yellow-dark); font-size: 13px; }
+
+.slot canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+  transition: opacity 0.5s ease;
+}
+
+.slot canvas:active {
+  cursor: grabbing;
+}
+
+.slot.done canvas {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.stats strong {
+  color: var(--ink);
+}
+
+.pills {
+  display: flex;
+  gap: 6px;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.pill.girl { background: var(--pink-bg); color: var(--pink-dark); }
+.pill.boy { background: var(--blue-bg); color: var(--blue-dark); }
+
+.status-playing {
+  border: 3px dashed #C9B8DD;
+  border-radius: 22px;
+  padding: 14px 16px;
+  text-align: center;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #6A5A80;
+}
+
+.status-won {
+  background: #2269A8;
+  color: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  padding: 14px 16px;
+  text-align: center;
+  box-shadow: 0 5px 0 var(--ink);
+  animation: srPop 0.35s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.won-title {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.won-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.hidden {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.btn {
+  flex: 1;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.1s ease;
+}
+
+.btn.primary {
+  background: var(--yellow);
+}
+
+.btn:active {
+  transform: translateY(2px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes srPop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slotPop {
+  50% { transform: scale(1.08); }
+}
