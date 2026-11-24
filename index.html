@@ -36,10 +36,6 @@
     </div>
 
     <div id="status-playing" class="status-playing">Quem vem aí? Continue raspando…</div>
-    <div id="status-won" class="status-won hidden" role="status">
-      <div class="won-title">Estamos esperando um menino!</div>
-      <div class="won-sub">Parabéns, família! 💙</div>
-    </div>
 
     <div class="actions">
       <button type="button" id="reveal-all" class="btn">Revelar tudo</button>
@@ -54,7 +50,16 @@
     </div>
   </template>
 
-  <canvas id="confetti"></canvas>
+  <dialog id="won-dialog" class="won-dialog" aria-labelledby="won-title">
+    <canvas id="confetti"></canvas>
+    <div class="won-panel">
+      <div id="won-title" class="won-title">Estamos esperando um menino!</div>
+      <div class="won-sub">Parabéns, família! 💙</div>
+      <form method="dialog">
+        <button class="btn">Fechar</button>
+      </form>
+    </div>
+  </dialog>
 
   <script src="script.js"></script>
 </body>

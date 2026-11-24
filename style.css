@@ -218,15 +218,42 @@ header p {
   color: #6A5A80;
 }
 
-.status-won {
+.won-dialog {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: none;
+  background: transparent;
+  padding: 24px;
+}
+
+.won-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+
+.won-dialog::backdrop {
+  background: rgba(59, 42, 85, 0.6);
+}
+
+.won-panel {
+  position: relative;
+  width: 100%;
+  max-width: 342px;
   background: #2269A8;
   color: #fff;
   border: 3px solid var(--ink);
-  border-radius: 22px;
-  padding: 14px 16px;
+  border-radius: 28px;
+  padding: 28px 20px 20px;
   text-align: center;
-  box-shadow: 0 5px 0 var(--ink);
+  box-shadow: 0 6px 0 var(--ink);
   animation: srPop 0.35s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.won-panel .btn {
+  width: 100%;
+  margin-top: 20px;
 }
 
 .won-title {
@@ -282,10 +309,12 @@ header p {
 }
 
 #confetti {
-  position: fixed;
+  position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 10;
+  z-index: 1;
 }
 
 @keyframes srPop {

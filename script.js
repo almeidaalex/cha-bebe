@@ -23,7 +23,7 @@ const scratchedEl = document.getElementById("scratched");
 const girlCountEl = document.getElementById("girl-count");
 const boyCountEl = document.getElementById("boy-count");
 const statusPlaying = document.getElementById("status-playing");
-const statusWon = document.getElementById("status-won");
+const wonDialog = document.getElementById("won-dialog");
 const confettiCanvas = document.getElementById("confetti");
 
 let slots = [];
@@ -44,7 +44,7 @@ function setup() {
   tally = { scratched: 0, boy: 0, girl: 0 };
   updateStats();
   statusPlaying.classList.remove("hidden");
-  statusWon.classList.add("hidden");
+  if (wonDialog.open) wonDialog.close();
 
   const types = shuffle(
     Object.entries(COUNTS).flatMap(([type, n]) => Array(n).fill(type))
@@ -182,7 +182,7 @@ function onSlotRevealed(type) {
   if (tally.scratched === slots.length) {
     setTimeout(() => {
       statusPlaying.classList.add("hidden");
-      statusWon.classList.remove("hidden");
+      wonDialog.showModal();
       launchConfetti();
     }, 600);
   }
@@ -252,6 +252,10 @@ document.getElementById("reveal-all").addEventListener("click", () => {
   slots.forEach((slot) => slot.reveal());
 });
 document.getElementById("restart").addEventListener("click", setup);
+wonDialog.addEventListener("click", (e) => {
+  if (e.target === wonDialog) wonDialog.close();
+});
+wonDialog.addEventListener("close", stopConfetti);
 
 // Wait for the fonts so the "?" and "RASPE" on the foil use the right typeface
 Promise.all([
