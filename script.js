@@ -1,5 +1,5 @@
 const COUNTS = { boy: 4, girl: 3, joker: 2 };
-const CLEAR_THRESHOLD = 0.6;
+const CLEAR_THRESHOLD = 0.2;
 const BRUSH_RADIUS = 18;
 
 const PRIZES = {
